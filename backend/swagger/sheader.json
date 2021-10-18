@@ -1,0 +1,177 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Yet Another Node.js Blogg Application API",
+        "description": "Yet Another Node.js Blogg Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:5000",
+    "tags": [
+        {
+            "description": "API for clients in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Fetch all client",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "description": "Create new client",
+                "parameters": [
+                    {
+                        "name": "Client",
+                        "in": "body",
+                        "description": "creat new clients",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New client is created",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        },
+                        "400": {
+                            "description": "Bad Request"
+                        },
+                        "401": {
+                            "description": "Unauthenticated"
+                        },
+                        "403": {
+                            "description": "Forbidden"
+                        },
+                        "security": [
+                            {
+                                "Bearer": []
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "/clients/{id}": {
+            "parameters": [
+                {
+                    "name": "_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of client that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Get client with given ID",
+                "responses": {
+                    "200": {
+                        "description": "Clients is found",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete client with given ID",
+                "tags": [
+                    "Clients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update client with give ID",
+                "tags": [
+                    "Clients"
+                ],
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Client": {
+            "required": [
+                "name",
+                "email",
+                "phone",
+                "providers"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "providers": {
+                    "type": "string"
+                }
+            }
+        },
+        "Clients": {
+            "type": "array",
+            "$ref": "#/definitions/Client"
+        }
+    }
+}

@@ -1,0 +1,214 @@
+openapi: "3.0.0"
+info:
+  title: This is swagger API Documentation For Clients Managements  
+  description: Full Stack Javascript Test from Protranslating
+  version: "1.0.0"
+  contact: 
+    name: Arthur Shadrack
+    email: arthurshadrack45@gmail.com
+  servers:
+    url: "http://localhost:5000"
+
+schemas: [http, https]
+
+paths:
+  /api/clients:
+    get:
+      summary: Get all clients in the system
+      responses:
+        200:
+          description: Success
+        400:
+          description: No record found
+        500:
+          description:  Internal server error
+          schema:
+            $ref: '#/definitions/Client'
+ 
+    post:
+      summary: Creat new client
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Client'
+      responses:
+        200:
+          description: New client created
+          content: 
+            application/json:
+              schema:
+                $ref: '#/definitions/Client'
+        500:
+          description: Internal server error
+
+  /api/clients/{id}:
+    get:
+      summary: Get client with given ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of client that we want to find
+        type: string
+      responses:
+        200:
+          decsription: success
+        404:
+          description: Client was not found.
+        500:
+          description: Internal server error. 
+
+    patch:
+      summary: Updates clients by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+          type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Client'
+      responses:
+        200:
+          decsription: Client  was updated
+        404:
+          description: Client was not found.
+        500:
+          description: Internal server error.        
+                
+    delete:
+      summary: Delete client with given ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of client that we want to delete
+        type: string
+      responses:
+        200:
+          decsription: Success
+        404:
+          description: provider was not found.
+        500:
+          description: Internal server error.
+
+
+  /api/providers:
+    get:
+      summary: Get all provider in the system
+      responses:
+        200:
+          decsription: Success
+        404:
+          description: providers was not found.
+        500:
+          description: Internal server error.   
+
+    post:
+      summary: Creat new provider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            properties:
+              _id:
+                type: string
+                description: Aut-generated  provider ID
+              name: 
+                type: string
+                description: provider name
+      responses:
+        200:
+          decsription: Success
+        500:
+          description: Internal server error.
+               
+  /api/providers/{id}:
+    get:
+      summary: Get provider with given ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of provider that we want to find
+        type: string
+      responses:
+        200:
+          decsription: Success
+        404:
+          description: provider was not found.
+        500:
+          description: Internal server error.
+                   
+    patch:
+      summary: Updates provider by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+          type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        200:
+          decsription: Success
+        404:
+          description: provider was not found.
+        500:
+          description: Internal server error. 
+        
+  
+    delete:
+      summary: Delete provider with given ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID of provider that we want to delete
+        type: string
+      responses:
+        200:
+          description: Provider is deleted successfull
+        404:
+          description: provider was not found.
+        500:
+          description: Internal server error.
+   
+definitions:
+  Client:
+    required:
+      - name
+      - email
+      - phone
+      - providers
+    properties: 
+      name:
+        type: string
+        description: Client name
+      email:
+        type: string
+        description: Client email
+      phone:
+        type: string
+        description: Client contact number
+      providers:
+        type: string
+        description: Client providers
+  Clients:
+    type: array
+    $ref: '#/definitions/Client'
+    
+
+  
