@@ -1,10 +1,10 @@
 openapi: "3.0.0"
 info:
-  title: This is swagger API Documentation For Clients Managements  
+  title: This is swagger API Documentation For Clients Managements System 
   description: Full Stack Javascript Test from Protranslating
   version: "1.0.0"
   contact: 
-    name: Arthur Shadrack
+    name: Arthur Shadrack through  mail, by click in this link or call 233243334484
     email: arthurshadrack45@gmail.com
   servers:
     url: "http://localhost:5000"

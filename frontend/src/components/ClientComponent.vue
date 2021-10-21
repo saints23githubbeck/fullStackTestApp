@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="header bg-secondary">
+    <div class="header bg-secondary" >
       <div class="row m-2">
-        <span class="mt-2 text-white">Clients</span>
+        <span class="mt-2 text-white "> <h3>Clients</h3> </span>
         <div class="col-md">
           <div class="d-flex justify-content-end m-1">
             <a
@@ -17,7 +17,24 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div v-show="client.clients.length == 0">
+            <div class="card" >
+      <div class="card-body">
+         <h5>No record found in the system</h5>
+           <div>
+            <a
+              type="button"
+              class="btn btn-light text-white bg-primary"
+              data-toggle="modal"
+              href="#price-modal"
+              @click="addClientClick()"
+              >Add Client</a
+            >
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="card" v-show="client.clients.length > 0">
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -43,7 +60,6 @@
                 <td>{{ client.phone }}</td>
                 <td>{{ client.providers.name }}</td>
                 <td>
-                  
                   <div
                     class="text-center d-inline"
                     style="width: 30px; height: 30px"
@@ -60,7 +76,7 @@
                   |
                   <div
                     class="text-center d-inline"
-                    style="width: 30px; height: 30px; "
+                    style="width: 30px; height: 30px"
                   >
                     <a
                       href="#"
@@ -91,7 +107,8 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title text-md-center" id="exampleModalLabel">
-                <span class="text-primary">{{ client.modalTitle }}</span>
+                <span class="text-primary" v-show="provider.providers.length == 0">Add Provider</span>
+                <span class="text-primary" v-show="provider.providers.length > 0">{{ client.modalTitle }}</span>
               </h5>
               <button
                 type="button"
@@ -104,25 +121,9 @@
             </div>
 
             <div class="modal-body">
-              <FormulateForm
-                :errors="{
-                  username: [
-                    'Username is too short',
-                    'Username is already taken',
-                  ],
-                }"
-              >
-                <FormulateInput
-                  name="username"
-                  label="Select a username"
-                  :errors="[
-                    'Username is too short',
-                    'Invalid username characters',
-                  ]"
-                />
-              </FormulateForm>
               <form>
-                <div class="row mb-3">
+                <div v-show="provider.providers.length > 0 ">
+                     <div class="row mb-3">
                   <label for="name" class="col-sm-3 col-form-label">Name</label>
                   <div class="col-sm-9">
                     <input
@@ -162,9 +163,10 @@
                     />
                   </div>
                 </div>
-                <div class="row mb-3">
+                </div>
+                <div class="row mb-3" v-show="client.name.length == 0">
                   <label for="phone" class="col-sm-3 col-form-label"
-                    >Providers</label
+                    ></label
                   >
                   <div class="col-sm-5">
                     <input
@@ -173,7 +175,7 @@
                       name="phone"
                       id="phone"
                       v-model="provider.name"
-                      autocomplete="of"
+                      autocomplete="of" placeholder="Add provider here"
                     />
                   </div>
                   <div class="col-sm-4">
@@ -186,8 +188,8 @@
                     </button>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <label for="phone" class="col-sm-3 col-form-label"></label>
+                <div class="row mb-3" v-show="provider.providers.length > 0">
+                  <label for="phone" class="col-sm-3 col-form-label"> Providers</label>
                   <div class="col-sm-9">
                     <select
                       multiple="true"
@@ -207,7 +209,9 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-12 text-right mt-5">
+                
+             
+                <div class="col-md-12 text-right mt-5" v-show="provider.providers.length > 0"> 
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -246,11 +250,10 @@ import axios from "axios";
 
 export default {
   name: "ClintComponent",
-  props: {
-    msg: String,
-  },
+
   data() {
     return {
+      
       provider: {
         providers: [],
         mame: "",
@@ -326,7 +329,7 @@ export default {
           this.error = error.response.data.error;
         }
       } else {
-        alert("Name, Email, Phone, Provider, feild Required");
+        alert("Name, Email, Phone, Provider, field Required");
       }
     },
 
@@ -341,8 +344,8 @@ export default {
           })
           .then((response) => {
             alert("Record Updated  succesffully");
-            this.getClients();
             response.data;
+            location.reload()
           });
       } catch (error) {
         this.error = error.response.data.error;

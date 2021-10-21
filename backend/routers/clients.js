@@ -6,14 +6,12 @@ const router = express.Router();
 // Fetch All Client
 
 router.get('/', (async (req, res) => {
-  var perPage = 10
-  , page = Math.max(0, req.params.page)
   try {
     Client.find({}, function (err, clients) {
       return res.send(clients).status(200)
-    }).populate("providers").sort({createdAt: -1})
-  } catch {
-    return res.status(400);
+    }).populate("providers").sort({ createdAt: "DESC" })
+  } catch (err) {
+    return res.status(400).send(err);
   }
 
 })
@@ -26,36 +24,37 @@ router.post("/", async (req, res) => {
   const client = new Client(req.body);
   try {
     const clients = await client.save();
-    return res.status(200).json(clients);
-  } catch {
-    return res.status(400);
+    return res.send(clients).status(200);
+  } catch (err) {
+    return res.status(400).send(err);
   }
 });
 
-// finding Single Client
+// finding Single Client by ID
 
 router.get('/:id', (async (req, res) => {
   try {
     const client = await Client.findById(req.params.id).populate("providers");
+
     return res.send(client).status(200);
-  } catch {
-    return res.status(400);
+  } catch (err) {
+    return res.status(400).send(err);
   }
 })
 );
 
-// // Deleting  Client
+// // Deleting  Client  by ID
 
 router.delete("/:id", async (req, res) => {
   try {
     const client = await Client.findByIdAndDelete(req.params.id);
     return res.status(200).send(client);
   } catch (err) {
-    return res.status(400);
+    return res.status(400).send(err);
   }
 });
 
-// // Updaing Client
+// // Updaing Client by ID
 
 router.patch("/:id", async (req, res) => {
   try {
@@ -63,7 +62,7 @@ router.patch("/:id", async (req, res) => {
     await client.updateOne({ $set: req.body });
     return res.status(200).send(client);
   } catch (err) {
-    return res.status(400);
+    return res.status(400).send(err);
   }
 });
 

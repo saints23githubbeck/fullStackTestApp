@@ -9,9 +9,7 @@ const YAML = require("yamljs")
 const path = require('path');
 const yamlFile  =  path.resolve(__dirname,'./swagger/swagger.yaml');
 const swagerDocs = YAML.load(yamlFile)
-// console.log(yamlFile);  
-// const specs = require("./swagger/sheader.json")
-// const specs = require("./swagger/swaggerDescription")
+
                                                                                                                    
    
 const app = express();
@@ -31,8 +29,6 @@ mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/DBclients", {
   console.error("Error: Database Fail Connection... " + err);
 });
 
-
-           
 
 app.use("/api/docs", swaggerUI.serve,swaggerUI.setup(swagerDocs)); 
 
