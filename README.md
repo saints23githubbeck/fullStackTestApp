@@ -1,6 +1,6 @@
 ### Product Onwr
 ```
-This product solely for ArthurShadrack, a fullStack JavaScript Developments test for recruitments process, and also, own by Arthur Shadrack
+This product solely for Arthur Shadrack, a fullStack JavaScript Developments and also, own by Arthur Shadrack
 
 ```
 ### Check on your machine if you have nodejs install
@@ -20,7 +20,7 @@ This product solely for ArthurShadrack, a fullStack JavaScript Developments test
  7. mdir and calledit project or any name of your choice.
  8. cd into the folder
  9. Clone the project from this git repository https://github.com/saints23githubbeck/fullStackTestApp.git.
- 10. cd into protranslatingTestApp.
+ 10. cd into fullStackTestApp.
  11. open the project folder by typing  code .
 
 ```
@@ -28,7 +28,7 @@ This product solely for ArthurShadrack, a fullStack JavaScript Developments test
 ### Backend server configuration
 ```
  12. open a  tirminal on visual studio code
- 13. cd into backend folder inside the protranslatingTestApp.
+ 13. cd into backend folder inside the fullStackTestApp.
  14. npm install on linux to install node package manager.
 
 ```
@@ -43,7 +43,7 @@ This product solely for ArthurShadrack, a fullStack JavaScript Developments test
 ### frontend server configuration
 ```
 17. open a new  terminal on visual studio code
-18. cd into frontend folder inside the protranslatingTestApp.
+18. cd into frontend folder inside the fullStackTestApp.
 19 run npm install to install node package manager.
 
 ```
