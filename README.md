@@ -1,6 +1,6 @@
 ### Product Onwr
 ```
-This product solely for Protranslating, a fullStack JavaScript Developments test for recruitments process, and also, own by protrnslating.
+This product solely for ArthurShadrack, a fullStack JavaScript Developments test for recruitments process, and also, own by Arthur Shadrack
 
 ```
 ### Check on your machine if you have nodejs install
@@ -19,7 +19,7 @@ This product solely for Protranslating, a fullStack JavaScript Developments test
  5. Download visaul studio code as recommended IDE
  7. mdir and calledit project or any name of your choice.
  8. cd into the folder
- 9. Clone the project from this git repository https://github.com/saints23githubbeck/protranslatingTestApp.git.
+ 9. Clone the project from this git repository https://github.com/saints23githubbeck/fullStackTestApp.git.
  10. cd into protranslatingTestApp.
  11. open the project folder by typing  code .
 
